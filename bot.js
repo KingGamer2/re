@@ -2234,8 +2234,8 @@ client.on('message', message =>{
 
 
 client.on('message', async message => {
-  if(!message.channel.guild) return message.reply('** This command only for servers**');
   if(message.content.startsWith(prefix + "شكوى")) {
+    if(!msg.channel.guild) return msg.reply('** هاذا الامر فقط للسيرفرات**');
     await message.channel.send("** اسم الشخص مع التاق اذا كانت شكوى عن شخص**").then(e => {
     let filter = m => m.author.id === message.author.id
     let lan = '';
@@ -2287,8 +2287,8 @@ gg.send({embed : new Discord.RichEmbed()
 });
 
 client.on('message', async message => {
-if(!message.channel.guild) return message.reply('** This command only for servers**');
   if(message.content.startsWith(prefix + "طلب")) {
+    if(!msg.channel.guild) return msg.reply('** هاذا الامر فقط للسيرفرات**');
     await message.channel.send("**ماذا تريد ان تشتري **").then(e => {
     let filter = m => m.author.id === message.author.id
     let lan = '';
