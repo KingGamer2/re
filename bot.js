@@ -2335,7 +2335,7 @@ gg.send({embed : new Discord.RichEmbed()
 const swearWords = ["#credit", "#credits", "#id", "#profile", "!invite", "!invites", "!top", "#top", "!play", "-p", "-skip", "!stop","-stop", "!xo", "!لو خيروك", "!slots", "!id", "!avatar", "!image", "!new", "!tc", "!help", "#help", "-help", "!cal", "!bot", "!ping", "!info", "!rooms", "!roles", "!ping", "#ping"]; 
 client.on('message', message => {
   if( swearWords.some(word => message.content.includes(word)) ) {
-  if(message.channel.id !== '494299288382210048') return;
+  if(message.channel.id !== '494921407466176522') return;
   if(message.author.bot) return;
    message.reply("لا تستخدم الاوامر بلشات").then(sentMessage =>{
       sentMessage.delete()
@@ -2659,7 +2659,7 @@ Sender <@${message.author.id}>                                                  
 
 
 client.on('message', function(message) {
-      const myID = "207225066771972096";
+if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
     if(message.content.startsWith(adminprefix + "setname")) {
 		        if(message.author.id !== myID) return;
             if(!args) return message.reply('اكتب الحالة اللي تريدها.');
@@ -2848,7 +2848,7 @@ client.on('message', message => {
 
   client.on('message',async message => {
     if(message.content.startsWith(adminprefix + "restart")) {
-        if(message.author.id !== "207225066771972096") return message.reply('You aren\'t the bot owner.');
+        if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
         message.channel.send('**Restarting.**').then(msg => {
             setTimeout(() => {
                msg.edit('**Restarting..**');
