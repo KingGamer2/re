@@ -271,7 +271,7 @@ ${prefix}emojilist- يعرض لك كل الايموجيات الي بالسير�
 ${prefix}owner - لارسال رسالة لاونر سيرفر
 ${prefix}suggest - اقتراح شئ 
 ${prefix}علشان تبلغ عن شخص - ابلاغ 
-${prefix}علشان تطلب متجر خاص فيك - طلب  
+${prefix}علشان تطلب اي منتج - طلب   
 ${prefix}short - لاختصار الروابط
 ${prefix}roles - يعرض لك كل رولات السيرفر
 **
@@ -2248,8 +2248,8 @@ client.on('message', message =>{
 
 client.on('message', async message => {
   if(!message.channel.guild) return message.reply('** This command only for servers**');
-  if(message.content.startsWith(prefix + "ابلاغ")) {
-    await message.channel.send("** اسم الشخص مع التاق**").then(e => {
+  if(message.content.startsWith(prefix + "شكوى")) {
+    await message.channel.send("** اسم الشخص مع التاق اذا كانت شكوى عن شخص**").then(e => {
     let filter = m => m.author.id === message.author.id
     let lan = '';
     let md = '';
@@ -2260,13 +2260,13 @@ client.on('message', async message => {
       lan = collected.first().content
       collected.first().delete()
 e.delete();
-     message.channel.send('** سبب الابلاغ **').then(m => {
+     message.channel.send('** سبب الشكوى**').then(m => {
 let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
 .then(co => {
   md = co.first().content
         co.first().delete()
         m.delete();
-message.channel.send('** هل انت متأكد من الابلاغ؟ **').then(ms => {
+message.channel.send('** هل انت متأكد من الشكوى؟ **').then(ms => {
 let br = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
 .then(col => {
   br = col.first().content
@@ -2279,13 +2279,13 @@ ms.delete();
         setTimeout(() => {
   b.edit(`**تم تقديم الايلاغ**`)
         },2000);
-var gg = message.guild.channels.find('name', 'complaints-شكاوي')
-if(!gg) return msg.reply('**الرجاء إضافة روم بإسم (complaints-شكاوي)**');
+var gg = message.guild.channels.find('name', 'الشكاوي')
+if(!gg) return msg.reply('**الرجاء إضافة روم بإسم (الشكاوي)**');
 if(gg) {
 gg.send({embed : new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .setTitle(`شكوى جديدة:`)
-.setDescription(`**  # - اسم المجرم !    : \n ${lan}\n # - سبب الابلاغ  :\n ${br} \n تم التقديم بواسطة  : <@${message.author.id}> **`)  
+.setDescription(`**  # - اسم المجرم !    : \n ${lan}\n # - سبب الشكوى  :\n ${br} \n تم التقديم بواسطة  : <@${message.author.id}> **`)  
 .setTimestamp()
 });
 }        
@@ -2302,7 +2302,7 @@ gg.send({embed : new Discord.RichEmbed()
 client.on('message', async message => {
 if(!message.channel.guild) return message.reply('** This command only for servers**');
   if(message.content.startsWith(prefix + "طلب")) {
-    await message.channel.send("**ما هي المدة المرادة ؟ شهر ام دائم **").then(e => {
+    await message.channel.send("**ماذا تريد ان تشتري **").then(e => {
     let filter = m => m.author.id === message.author.id
     let lan = '';
     let md = '';
@@ -2313,7 +2313,7 @@ if(!message.channel.guild) return message.reply('** This command only for server
       lan = collected.first().content
       collected.first().delete()
 e.delete();
-     message.channel.send('** حسنا فم بتحويل الكردت الى الاونر وسيتم الموافقة على الطلب  قريبا**').then(m => {
+     message.channel.send('** حسنا كم ستدفع ؟ كردت ام بايبال؟**').then(m => {
 let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
 .then(co => {
   md = co.first().content
@@ -2324,13 +2324,13 @@ let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors:
         setTimeout(() => {
   b.edit(`**تم الطب**`)
         },2000);
-var gg = message.guild.channels.find('name', 'orders-طلبات')
-if(!gg) return msg.reply('**الرجاء إضافة روم بإسم (orders-طلبات)**');
+var gg = message.guild.channels.find('name', 'طلبات-الشراء')
+if(!gg) return msg.reply('**الرجاء إضافة روم بإسم (طلبات-الشراء)**');
 if(gg) {
 gg.send({embed : new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .setTitle(`طلب جديد:`)
-.setDescription(`**  # - المدة!    : \n ${lan} \n تم التقديم بواسطة  : <@${message.author.id}> **`)  
+.setDescription(`**  # - المنتج!    : \n ${lan} \n # - سوف يدفع :  :\n ${br}      \n تم التقديم بواسطة  : <@${message.author.id}> **`)  
 .setTimestamp()
 });
 }        
