@@ -269,7 +269,7 @@ ${prefix}tc - لعمل روم صوتي او كتابي مع الاعدادات
 ${prefix}cal - لاستخدام الالة الحاسبة + للجمع - للطرح * للضرب / للقسمة
 ${prefix}emojilist- يعرض لك كل الايموجيات الي بالسيرفر
 ${prefix}owner - لارسال رسالة لاونر سيرفر
-${prefix}suggest - اقتراح شئ 
+${prefix}لاقتراح اي شيء - اقتراح
 ${prefix}علشان تبلغ عن شخص - ابلاغ 
 ${prefix}علشان تطلب اي منتج - طلب   
 ${prefix}short - لاختصار الروابط
@@ -2285,7 +2285,7 @@ if(gg) {
 gg.send({embed : new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .setTitle(`شكوى جديدة:`)
-.setDescription(`**  # - اسم المجرم !    : \n ${lan}\n # - سبب الشكوى  :\n ${br} \n تم التقديم بواسطة  : <@${message.author.id}> **`)  
+.setDescription(`**  # - اسم المجرم !    : \n ${lan}\n # - سبب الشكوى  :\n ${md} \n تم التقديم بواسطة  : <@${message.author.id}> **`)  
 .setTimestamp()
 });
 }        
@@ -2330,7 +2330,7 @@ if(gg) {
 gg.send({embed : new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .setTitle(`طلب جديد:`)
-.setDescription(`**  # - المنتج!    : \n ${lan} \n # - سوف يدفع :  :\n ${br}      \n تم التقديم بواسطة  : <@${message.author.id}> **`)  
+.setDescription(`**  # - المنتج!    : \n ${lan} \n # - سوف يدفع   :\n ${md}      \n تم التقديم بواسطة  : <@${message.author.id}> **`)  
 .setTimestamp()
 });
 }        
@@ -2411,9 +2411,9 @@ client.on('message', msg => {
     if(msg.guild.channels.find('name', 'الاقتراحات')) {
       //غيره هنا كمان اذا غيرت فوق
       msg.guild.channels.find('name', 'الاقتراحات').send(`
-    **New Suggestion By** : ${msg.member}
+    **اقتراح جديد بواسطة** : ${msg.member}
 
-      **The Suggestion** :
+      **الاقتراح** :
       ${args.join(" ").split(msg.mentions.members.first()).slice(' ')}
       `)
       .then(function (message) {
@@ -2710,7 +2710,7 @@ Sender <@${message.author.id}>                                                  
 
 
 client.on('message', function(message) {
-const myID = ['360048522071900163','303225158473220098','352832614190809089'];
+      const myID = "207225066771972096";
     if(message.content.startsWith(adminprefix + "setname")) {
 		        if(message.author.id !== myID) return;
             if(!args) return message.reply('اكتب الحالة اللي تريدها.');
@@ -2899,7 +2899,7 @@ client.on('message', message => {
 
   client.on('message',async message => {
     if(message.content.startsWith(adminprefix + "restart")) {
-        if(message.author.id !== "360048522071900163","303225158473220098","352832614190809089") return message.reply('You aren\'t the bot owner.');
+        if(message.author.id !== "207225066771972096") return message.reply('You aren\'t the bot owner.');
         message.channel.send('**Restarting.**').then(msg => {
             setTimeout(() => {
                msg.edit('**Restarting..**');
