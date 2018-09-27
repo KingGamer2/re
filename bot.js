@@ -2358,7 +2358,6 @@ const alphacodes = [
 
 ]
 client.on('message', message => {
-var Muted = message.guild.roles.find("name", "Muted");
   if(alphacodes.some(word => message.content.includes(word))) {
   if(message.channel.id !== '494921407466176522') return;
   if (message.author.bot) return;
