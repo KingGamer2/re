@@ -2659,9 +2659,8 @@ Sender <@${message.author.id}>                                                  
 
 
 client.on('message', function(message) {
-if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
     if(message.content.startsWith(adminprefix + "setname")) {
-		        if(message.author.id !== myID) return;
+if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
             if(!args) return message.reply('اكتب الحالة اللي تريدها.');
         client.user.setUsername(args);
         message.channel.send(':white_check_mark: Done!').then(msg => {
