@@ -2332,60 +2332,23 @@ gg.send({embed : new Discord.RichEmbed()
 
 
 
-const alphacodes = [
-  "#credit",
-  "#credits",
-  "!لو خيروك",
-  "#slots",
-  "#id",
-  "#profile",
-  "-p",  
-  "#daily", 
-  "#profile",
-  "#rep",
-  "#top",
-  "!level",
-  "!id",
-  "!فكك",
-  "!صراحه",
-  "!xo",
-  "!كت تويت",
-  "!invites",
-  "!top",
-  "!help",
-  "!stop",
-  "!play",
-  "!skip"
-
-]
+const swearWords = ["كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة"]; 
 client.on('message', message => {
-  if(alphacodes.some(word => message.content.includes(word))) {
-  if(message.channel.id !== '494921407466176522') return;
-  if (message.author.bot) return;
-  
-  if(message.member.roles.has()) return;
-  if(!message.member.roles.has()) {
-  message.member.addRole(warn)
-  message.reply(`**تم اعطائك تحذير لانك استخدمت اوامر في الشات😠**`) 
-  }
-  
-  if(message.member.roles.has(warn.id)) {
-      message.member.addRole(Muted)
-      message.member.removeRole(warn)
+  if( swearWords.some(word => message.content.includes(word)) ) {
+  if(message.channel.id !== '494299288382210048') return;
+  if(message.author.bot) return;
+      message.member.addRole(mute)
       let mutetime = "10m";
     
-    message.reply(`**تم اعطائك ميوت كتابي لمدة 10 دقائق 🤐**!`);
+    message.reply(`**تم اعطائك ميوت كتابي لمدة 10 دقائق لانك استعملت اوامر بلشات🤐**!`);
   
       setTimeout(function(){
-      message.member.removeRole(Muted)
+      message.member.removeRole(mute)
       message.reply(`تم الغاء الميوت عنك!`)
     }, ms(mutetime))    
-     
-  }
   
-  }
-  })
-  
+  }  
+});
   
 
 
