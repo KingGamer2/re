@@ -2332,15 +2332,15 @@ gg.send({embed : new Discord.RichEmbed()
 
 
 
-const swearWords = ["كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة", "كلمة"]; 
+const swearWords = ["#credit", "#credits", "#id", "#profile", "!invite", "!invites", "!top", "#top", "!play", "-p", "-skip", "!stop","-stop", "!xo", "!لو خيروك", "!slots", "!id", "!avatar", "!image", "!new", "!tc", "!help", "#help", "-help", "!cal", "!bot", "!ping", "!info", "!rooms", "!roles", "!ping", "#ping"]; 
 client.on('message', message => {
   if( swearWords.some(word => message.content.includes(word)) ) {
   if(message.channel.id !== '494299288382210048') return;
   if(message.author.bot) return;
    message.reply("لا تستخدم الاوامر بلشات").then(sentMessage =>{
-      sentMessage.delete(20000)
+      sentMessage.delete()
     })
-    message.delete(3000)
+    message.delete()
   }
 });
   
