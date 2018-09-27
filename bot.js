@@ -2337,17 +2337,11 @@ client.on('message', message => {
   if( swearWords.some(word => message.content.includes(word)) ) {
   if(message.channel.id !== '494299288382210048') return;
   if(message.author.bot) return;
-      message.member.addRole(Muted)
-      let mutetime = "10m";
-    
-    message.reply(`**تم اعطائك ميوت كتابي لمدة 10 دقائق لانك استعملت اوامر بلشات🤐**!`);
-  
-      setTimeout(function(){
-      message.member.removeRole(Muted)
-      message.reply(`تم الغاء الميوت عنك!`)
-    }, ms(mutetime))    
-  
-  }  
+   message.reply("لا تستخدم الاوامر بلشات").then(sentMessage =>{
+      sentMessage.delete(20000)
+    })
+    message.delete(3000)
+  }
 });
   
 
