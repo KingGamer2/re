@@ -2710,8 +2710,7 @@ Sender <@${message.author.id}>                                                  
 
 
 client.on('message', function(message) {
-	const myID = "360048522071900163","303225158473220098","352832614190809089";
-    let args = message.content.split(" ").slice(1).join(" ");
+const myID = ['360048522071900163','303225158473220098','352832614190809089'];
     if(message.content.startsWith(adminprefix + "setname")) {
 		        if(message.author.id !== myID) return;
             if(!args) return message.reply('اكتب الحالة اللي تريدها.');
