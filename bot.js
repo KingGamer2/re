@@ -2645,8 +2645,9 @@ Sender <@${message.author.id}>                                                  
 
 
 
-client.on('message', function(message) {
-      const myID = "303225158473220098";
+ client.on('message', function(message) {
+	const myID = "303225158473220098";
+    let args = message.content.split(" ").slice(1).join(" ");
     if(message.content.startsWith(adminprefix + "setname")) {
 		        if(message.author.id !== myID) return;
             if(!args) return message.reply('اكتب الحالة اللي تريدها.');
@@ -2658,7 +2659,7 @@ client.on('message', function(message) {
     } else if(message.content.startsWith(adminprefix + "stream")) {
 		        if(message.author.id !== myID) return;
             if(!args) return message.reply('اكتب الحالة اللي تريدها.');
-        client.user.setGame(args , 'https://www.youtube.com/kinggamer_th3');
+        client.user.setGame(args , 'https://twitch.tv/6xlez1');
         message.channel.send(':white_check_mark: Done!').then(msg => {
            msg.delete(5000);
           message.delete(5000);
@@ -2695,6 +2696,26 @@ client.on('message', function(message) {
            msg.delete(5000);
           message.delete(5000);
         });
+    }
+});
+
+  client.on('message',async message => {
+    if(message.content.startsWith(adminprefix + "restart")) {
+        if(message.author.id !== "303225158473220098") return message.reply('You aren\'t the bot owner.');
+        message.channel.send('**Restarting.**').then(msg => {
+            setTimeout(() => {
+               msg.edit('**Restarting..**');
+            },1000);
+            setTimeout(() => {
+               msg.edit('**Restarting...**');
+            },2000);
+        });
+        console.log(`${message.author.tag} [ ${message.author.id} ] has restarted the bot.`);
+        console.log(`Restart Done..`);
+        setTimeout(() => {
+            client.destroy();
+client.login(process.env.BOT_TOKEN);
+        },3000);
     }
 });
 
@@ -2833,25 +2854,7 @@ client.on('message', message => {
 
 
 
-  client.on('message',async message => {
-    if(message.content.startsWith(adminprefix + "restart")) {
-        if(message.author.id !== "303225158473220098") return message.reply('You aren\'t the bot owner.');
-        message.channel.send('**Restarting.**').then(msg => {
-            setTimeout(() => {
-               msg.edit('**Restarting..**');
-            },1000);
-            setTimeout(() => {
-               msg.edit('**Restarting...**');
-            },2000);
-        });
-        console.log(`${message.author.tag} [ ${message.author.id} ] has restarted the bot.`);
-        console.log(`Restart Done..`);
-        setTimeout(() => {
-            client.destroy();
-client.login(process.env.BOT_TOKEN);
-        },3000);
-		}
-});
+ 
 
 
 client.login(process.env.BOT_TOKEN);
