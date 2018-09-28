@@ -12,6 +12,7 @@ const fs = require('fs');
 const gif = require("gif-search");
 const prefix = "!";
 const adminprefix = "-"
+const pprefix = "R"
 /////////////////////////
 ////////////////////////
 //////////////////////
@@ -31,7 +32,7 @@ client.on('message', async msg => {
 	let command = msg.content.toLowerCase().split(" ")[0];
 	command = command.slice(prefix.length)
 
-	if (command === `play`) {
+	if (command === pprefix + `play`) {
 		const voiceChannel = msg.member.voiceChannel;
         
         if (!voiceChannel) return msg.channel.send("I can't find you in any voice channel!");
@@ -269,9 +270,7 @@ ${prefix}tc - لعمل روم صوتي او كتابي مع الاعدادات
 ${prefix}cal - لاستخدام الالة الحاسبة + للجمع - للطرح * للضرب / للقسمة
 ${prefix}emojilist- يعرض لك كل الايموجيات الي بالسيرفر
 ${prefix}owner - لارسال رسالة لاونر سيرفر
-${prefix}لاقتراح اي شيء - اقتراح
-${prefix}علشان تبلغ عن شخص - ابلاغ 
-${prefix}علشان تطلب اي منتج - طلب   
+${prefix}لاقتراح اي  شيء - اقتراح make room name الاقتراحات  
 ${prefix}short - لاختصار الروابط
 ${prefix}roles - يعرض لك كل رولات السيرفر
 **
@@ -306,7 +305,7 @@ ${prefix}say - يقول البوت التقوله ويحذف رسالتك
    `,`
         ***__أوامر الموسيفة__***
 **
-!play - لتشغيل أغنية برآبط أو بأسم
+Rplay - لتشغيل أغنية برآبط أو بأسم
 !skip - لتجآوز الأغنية الحآلية
 !pause - إيقآف الأغنية مؤقتا
 !resume - لموآصلة الإغنية بعد إيقآفهآ مؤقتا
@@ -1451,6 +1450,47 @@ if(message.content.startsWith(prefix + "slots")) {
 }
 });
 
+client.on("message", (message) => {
+  var sender = message.author
+if(message.content.startsWith(prefix + 'daily')) {
+if (games[sender.id].lastDaily != moment().format('day')) {
+    games[sender.id].lastDaily = moment().format('day')
+ games[message.author.id].credits += 200;
+    message.channel.send(`**${message.author.username} you collect your \`200\` :dollar: daily pounds**`)
+} else {
+    message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes ${moment().endOf('day').fromNow()}**`)
+}
+}
+})
+//مصاري//
+client.on("message", (message) => {
+  if (message.author.bot) return;
+    if (message.author.id === client.user.id) return;
+	if(!message.channel.guild) return;       
+if (message.content === prefix + 'credits') {
+message.channel.send(`** ${message.author.username}, your :credit_card: balance is ${games[message.author.id].credits}.**`)
+}
+});
+
+client.on('message', message => {
+  if (message.author.bot) return;
+    if (message.author.id === client.user.id) return;
+	if(!message.channel.guild) return;       
+    if(message.content.startsWith(prefix+ 'rep')) {
+    let ment = message.mentions.users.first()  
+    if(!ment) return message.channel.send(`**:mag: |  ${message.author.username}, the user could not be found.    **`);
+    if(profile[message.author.id].reps != (new Date).getTime());{
+    profile[message.author.id].reps =  profile[message.author.id].reps = (new Date).getTime();
+    profile[ment.id].rep += 1; 
+    message.channel.send(`** :up:  |  ${message.author.username} has given ${ment} a reputation point!**`).then(()=> profile[message.author.id].lastDaily = (new Date).getTime());
+    }
+    	if(profile[message.author.id].reps && (new Date).getTime() - message.mentions.users.first() < 60*1000*60*24) {
+        let r = (new Date).getTime() - profile[message.author.id].reps;
+          r = 60*1000*60*24 - r;
+        return message.channel.send(`:stopwatch: |  ${message.author.username}, you can award more reputation in ${pretty(r, {verbose:true})}`);
+	}
+    }
+    });
 
 
 
@@ -2225,110 +2265,6 @@ client.on('message', message =>{
         message.channel.send(`**\`\`\`xl\n${res}\`\`\`**`);
     }
 });
-
-
-
-
-
-
-
-
-client.on('message', async message => {
-  if(message.content.startsWith(prefix + "شكوى")) {
-    await message.channel.send("** اسم الشخص مع التاق اذا كانت شكوى عن شخص**").then(e => {
-    let filter = m => m.author.id === message.author.id
-    let lan = '';
-    let md = '';
-    let br = '';
-    let bs = '';
-    let chaLan = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-    .then(collected => {
-      lan = collected.first().content
-      collected.first().delete()
-e.delete();
-     message.channel.send('** سبب الشكوى**').then(m => {
-let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(co => {
-  md = co.first().content
-        co.first().delete()
-        m.delete();
-message.channel.send('** هل انت متأكد من الشكوى؟ **').then(ms => {
-let br = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(col => {
-  br = col.first().content
-        col.first().delete()
-
-ms.delete();
-
-
- message.channel.send('جاري التقديم ..').then(b => {
-        setTimeout(() => {
-  b.edit(`**تم تقديم الايلاغ**`)
-        },2000);
-var gg = message.guild.channels.find('name', 'الشكاوي')
-if(!gg) return msg.reply('**الرجاء إضافة روم بإسم (الشكاوي)**');
-if(gg) {
-gg.send({embed : new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.setTitle(`شكوى جديدة:`)
-.setDescription(`**  # - اسم المجرم !    : \n ${lan}\n # - سبب الشكوى  :\n ${md} \n تم التقديم بواسطة  : <@${message.author.id}> **`)  
-.setTimestamp()
-});
-}        
-})
-})
-})
-})
-})
-})
-})
-  }
-});
-
-client.on('message', async message => {
-  if(message.content.startsWith(prefix + "طلب")) {
-    await message.channel.send("**ماذا تريد ان تشتري **").then(e => {
-    let filter = m => m.author.id === message.author.id
-    let lan = '';
-    let md = '';
-    let br = '';
-    let bs = '';
-    let chaLan = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-    .then(collected => {
-      lan = collected.first().content
-      collected.first().delete()
-e.delete();
-     message.channel.send('** حسنا كم ستدفع ؟ كردت ام بايبال؟**').then(m => {
-let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(co => {
-  md = co.first().content
-        co.first().delete()
-        m.delete();
-
- message.channel.send('جاري التقديم ..').then(b => {
-        setTimeout(() => {
-  b.edit(`**تم الطب**`)
-        },2000);
-var gg = message.guild.channels.find('name', 'طلبات-الشراء')
-if(!gg) return msg.reply('**الرجاء إضافة روم بإسم (طلبات-الشراء)**');
-if(gg) {
-gg.send({embed : new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.setTitle(`طلب جديد:`)
-.setDescription(`**  # - المنتج!    : \n ${lan} \n # - سوف يدفع   :\n ${md}      \n تم التقديم بواسطة  : <@${message.author.id}> **`)  
-.setTimestamp()
-});
-}        
-})
-})
-})
-})
-}) 
-  }
-});
-
-
-
 
   
 
