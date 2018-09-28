@@ -2235,7 +2235,6 @@ client.on('message', message =>{
 
 client.on('message', async message => {
   if(message.content.startsWith(prefix + "شكوى")) {
-    if(!msg.channel.guild) return msg.reply('** هاذا الامر فقط للسيرفرات**');
     await message.channel.send("** اسم الشخص مع التاق اذا كانت شكوى عن شخص**").then(e => {
     let filter = m => m.author.id === message.author.id
     let lan = '';
@@ -2288,7 +2287,6 @@ gg.send({embed : new Discord.RichEmbed()
 
 client.on('message', async message => {
   if(message.content.startsWith(prefix + "طلب")) {
-    if(!msg.channel.guild) return msg.reply('** هاذا الامر فقط للسيرفرات**');
     await message.channel.send("**ماذا تريد ان تشتري **").then(e => {
     let filter = m => m.author.id === message.author.id
     let lan = '';
@@ -2332,17 +2330,6 @@ gg.send({embed : new Discord.RichEmbed()
 
 
 
-const swearWords = ["#credit", "#credits", "#id", "#profile", "!invite", "!invites", "!top", "#top", "!play", "-p", "-skip", "!stop","-stop", "!xo", "!لو خيروك", "!slots", "!id", "!avatar", "!image", "!new", "!tc", "!help", "#help", "-help", "!cal", "!bot", "!ping", "!info", "!rooms", "!roles", "!ping", "#ping"]; 
-client.on('message', message => {
-  if( swearWords.some(word => message.content.includes(word)) ) {
-  if(message.channel.id !== '494921407466176522') return;
-  if(message.author.bot) return;
-   message.reply("لا تستخدم الاوامر بلشات").then(sentMessage =>{
-      sentMessage.delete()
-    })
-    message.delete()
-  }
-});
   
 
 
@@ -2659,7 +2646,7 @@ Sender <@${message.author.id}>                                                  
 
 
 client.on('message', function(message) {
-      const myID = "360048522071900163";
+      const myID = "303225158473220098";
     if(message.content.startsWith(adminprefix + "setname")) {
 		        if(message.author.id !== myID) return;
             if(!args) return message.reply('اكتب الحالة اللي تريدها.');
@@ -2848,7 +2835,7 @@ client.on('message', message => {
 
   client.on('message',async message => {
     if(message.content.startsWith(adminprefix + "restart")) {
-        if(message.author.id !== "360048522071900163") return message.reply('You aren\'t the bot owner.');
+        if(message.author.id !== "303225158473220098") return message.reply('You aren\'t the bot owner.');
         message.channel.send('**Restarting.**').then(msg => {
             setTimeout(() => {
                msg.edit('**Restarting..**');
